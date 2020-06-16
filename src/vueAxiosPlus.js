@@ -4,11 +4,9 @@ import {
 } from 'ant-design-vue'
 import moment from 'moment'
 
-const axiosPlus = {}
+const vueAxiosPlus = {}
 
 const errorMsg = (err = '系统错误，请稍后重新访问') => message.error(err)
-
-
 
 const loginCheck = (config, customHeader, expireTime, needAuthArry, expireCallback) => {
   const theConfig = config;
@@ -42,7 +40,7 @@ axios.interceptors.response.use(
       const res = response.data;
       if(res.code === 0){
         return res
-      }else {
+      } else {
         message.error(res.message);
       }
     }
@@ -53,13 +51,14 @@ axios.interceptors.response.use(
   }
 )
 
-axiosPlus.install = function (Vue, options) {
+vueAxiosPlus.install = function (Vue, options) {
   axios.defaults.baseURL = options.baseURL || '';
   axios.defaults.timeout = options.timeout || 150000;
   let customHeader = options.customHeader || {};
   let expireTime = options.expireTime || 2 * 3600 * 1000
   let needAuthArry = options.needAuthArry || [];
   let expireCallback = expireCallback || null
+
   Vue.prototype.$axios = axios
 
 
@@ -109,4 +108,4 @@ axiosPlus.install = function (Vue, options) {
   })
 }
 
-export default axiosPlus
+export default vueAxiosPlus

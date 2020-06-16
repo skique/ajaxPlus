@@ -1,11 +1,12 @@
 {
-  "name": "axios-plus",
+  "name": "vue-axios-plus1",
   "description": "基于axios的vue插件",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "taoyouyou <853094838@qq.com>",
   "license": "MIT",
   "private": false,
   "main":"dist/ajaxPlus.js",
+  "Keywords": "vue http axios post get login auth request",
   "repository": {
     "type": "git",
     "url": "https://github.com/skique/ajaxPlus"
