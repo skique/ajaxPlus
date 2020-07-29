@@ -4,6 +4,14 @@ import {
 } from 'ant-design-vue'
 import moment from 'moment'
 
+function getcookie(objname){
+  var arrstr = document.cookie.split("; ");
+  for (var i = 0; i < arrstr.length; i++){
+      var temp = arrstr[i].split("=");
+      if (temp[0] == objname) return unescape(temp[1]);
+  }
+}
+
 const vueAxiosPlus = {}
 
 const errorMsg = (err = '系统错误，请稍后重新访问') => message.error(err)
@@ -17,11 +25,16 @@ const loginCheck = (config, customHeader, expireTime, needAuthArry, expireCallba
       expireCallback();
       sessionStorage.clear();
     } else {
-      Object.entries(customHeader).forEach(item => {
-        let key = item[0];
-        let value = item[1];
-        theConfig.headers[key] = value
-      })
+      // Object.entries(customHeader).forEach(item => {
+      //   let key = item[0];
+      //   let value = item[1];
+      //   if(key.indexOf('Token') !== -1 || key.indexOf('token') !== -1){
+      //     theConfig.headers[key] = value +' '+ getcookie('token');
+      //   }else{
+      //     theConfig.headers[key] = value
+      //   }
+      // })
+      theConfig.headers['SiteToken'] = 'Bearer '+ getcookie('token');
     }
   }
   return theConfig
